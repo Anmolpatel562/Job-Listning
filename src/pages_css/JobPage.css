@@ -1,0 +1,154 @@
+.JobPageContainer{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.headerSection{
+    height: 15%;
+    width: 100%;
+    position: relative;
+}
+.imgHeader{
+    width: 100%;
+    height: 100%;
+}
+.loginSignUpBtn{
+    display: flex;
+    gap: 1rem;
+    position: absolute;
+    top: 35%;
+    right: 5%;
+}
+.loginBtn{
+    background-color: #ED5353;
+    color: white;
+    border: 2px solid white;
+    width: 85px;
+    border-radius: 5px;
+    font-weight: 500;
+    padding: .2rem;
+}
+.registerBtn{
+    color: #ED5353;
+    width: 95px;
+    padding: .2rem;
+    border-radius: 5px;
+    font-weight: 600;
+    border: none;
+}
+.appName{
+    position: absolute;
+    top: 32%;
+    left: 5%;
+    color: white;
+}
+
+.mainSection{
+    height: 85%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.jobListContainer{
+    width: 70%;
+    height: 100%;
+    margin: 2.5rem auto;
+}
+.searchBar{
+    width: 100%;
+    position: relative;
+}
+.skillbtn{
+    width: 120px;
+    height: 40px;
+    border: 2px solid #A2A2A2;
+    color:#848484 ;
+    border-radius: 5px;
+    padding: .5rem;
+}
+.seachJobContainer{
+    height: max-content;
+    width: 100%;
+    padding: 1rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    box-shadow: #FF202040 0px 5px 15px;
+
+}
+.jobSearchBar::placeholder{
+ font-size: 20px;
+ color: #848484;
+}
+
+.applyFilterBtn{
+    width: 120px;
+    color: white;
+    background-color:#ED5353;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+}
+
+.clearBtn{
+   width: 70px; 
+   height: 40px;
+   border: none;
+   background-color: white;
+   margin-left: 1.5rem;
+}
+
+.chipContainer{
+    display: flex;
+    background-color: #FFEEEE;
+    width: 140px;
+    height: 35px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.cross{
+    background-color: #FF6B6B;
+    height: 100%;
+    width: 25%;
+    text-align: center;
+    border-radius: 0 5px 5px 0;
+}
+
+.eachJob{
+    height: max-content;
+    width: 100%;
+    padding: 1rem 3rem;
+    box-shadow: #FF202040 0px 5px 15px;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.companyLogo{
+    width: 80%;
+    height: 80%;
+}
+
+.skillChip{
+  background-color: #FFEEEE;  
+  padding: .5rem;
+  border-radius: 5px;
+  font-weight: 800;
+}
+
+.viewDetailBtn{
+    width: 120px;
+    color: white;
+    font-size: 15px;
+    background-color:#ED5353;
+    height: 33px;
+    border: none;
+    padding: .35rem 0 0 1rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+}
