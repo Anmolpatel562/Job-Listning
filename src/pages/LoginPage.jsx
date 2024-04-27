@@ -2,9 +2,14 @@ import "../pages_css/LoginPage.css";
 import React, { useState } from "react";
 import loginImage from "../resources/loginImage.png";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../auth/userApis.js";
+
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
+
   const [userDetails, setUserDetails] = useState({
     email: "",
     password: "",
@@ -14,7 +19,7 @@ const LoginPage = () => {
     toast(value);
   };
 
-  const signInBtnHandler = () => {
+  const signInBtnHandler = async () => {
     if (!userDetails.email || !userDetails.password) {
       if (!userDetails.email && userDetails.password) {
         notify("Please Enter the Email First !!");
@@ -25,8 +30,17 @@ const LoginPage = () => {
       }
       return;
     }
-    notify("User Logged In Successfully.");
-    console.log(userDetails);
+    const response = await loginUser(userDetails);
+    if(!response){
+      return;
+    }
+    const token = response.data.token;
+    const userName = response.data.name;
+    const userId = response.data.userId;
+    localStorage.setItem("token",JSON.stringify(token));
+    localStorage.setItem("name",JSON.stringify(userName));
+    localStorage.setItem("userId",JSON.stringify(userId));
+    navigate('/jobPage');
   };
 
   return (
@@ -74,7 +88,7 @@ const LoginPage = () => {
           </div>
           <p style={{ fontSize: "12px", marginTop: ".3rem" }}>
             Don’t have an account?
-            <Link to={'/SignUp'}>
+            <Link to={"/SignUp"}>
               <span
                 style={{
                   marginLeft: ".2rem",
@@ -89,7 +103,7 @@ const LoginPage = () => {
         </div>
       </div>
       <div className="loginImgContainer">
-        <img src={loginImage} className="loginImg" />
+        <img src={loginImage} className="loginImg" alt=""/>
         <p className="imgTitle">Your Personal Job Finder</p>
       </div>
     </div>

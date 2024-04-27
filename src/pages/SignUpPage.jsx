@@ -3,12 +3,13 @@ import "../pages_css/LoginPage.css";
 import loginImage from "../resources/loginImage.png";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import {registerUser}  from "../auth/userApis.js";
 
 const SignUpPage = () => {
   const [userDetails, setUserDetails] = useState({
     name: "",
     email: "",
-    mobile: "",
+    phone: "",
     password: "",
     checked: false,
   });
@@ -17,19 +18,21 @@ const SignUpPage = () => {
     toast(value);
   };
 
-  const signUpBtnHandler = () => {
+  const signUpBtnHandler = async() => {
     if (
+      !userDetails.name ||
       !userDetails.email ||
-      !userDetails.password ||
-      !userDetails.mobile ||
+      !userDetails.phone ||
       !userDetails.password ||
       !userDetails.checked
     ) {
       notify("Please Enter All the fields");
       return;
     }
-    notify("User Logged In Successfully.");
-    console.log(userDetails);
+    const response = await registerUser(userDetails);
+    if(response){
+       toast(response.data.message);
+    }
   };
   return (
     <div className="registerContainer">
@@ -67,10 +70,10 @@ const SignUpPage = () => {
             <input
               style={{ height: "34px", padding: ".5rem" }}
               type="Number"
-              placeholder="Mobile"
-              value={userDetails.mobile}
+              placeholder="phone"
+              value={userDetails.phone}
               onInput={(e) =>
-                setUserDetails({ ...userDetails, mobile: e.target.value })
+                setUserDetails({ ...userDetails, phone: e.target.value })
               }
             />
             <input

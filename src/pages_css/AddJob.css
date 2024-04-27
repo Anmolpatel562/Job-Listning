@@ -1,0 +1,93 @@
+.addJobContainer{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+}
+
+.jobLeftContainer{
+    width: 55%;
+    height: 100%;
+}
+
+.jobRightContainer{
+    width: 45%;
+    height: 100%;
+}
+
+.jobFormContainer{
+    width: 90%;
+    height: 90%;
+    margin: auto auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.labelInputContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.labelInput{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .2rem;
+}
+
+.inputFields{
+    width: 65%;
+    border: 2px solid #C2C2C2;
+    height: 34px;
+    padding: .5rem;
+    border-radius: 5px;
+}
+.inputFields::placeholder{
+    color: #C2C2C2;
+}
+
+.addJobButton{
+    background-color: rgb(67, 150, 253);
+    width: 120px;
+    height: max-content;
+    padding-top: .3rem;
+    padding-bottom: .3rem;
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.cancelBtn{
+    border: 2px solid #C2C2C2;
+    color: #C2C2C2;
+    background-color: white;
+    width: 110px;
+    height: max-content;
+    padding-top: .2rem;
+    padding-bottom: .2rem;
+    text-align: center;
+    border-radius: 5px;
+}
+.skillSelectedContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.skillRightSide{
+    width: 65%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.clearSkillsBtn{
+    color: #C2C2C2;
+    width: max-content;
+    border: 2px solid #C2C2C2;
+    background-color: white;
+    border-radius: 5px;
+}

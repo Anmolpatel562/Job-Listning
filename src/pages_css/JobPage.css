@@ -5,7 +5,7 @@
     flex-direction: column;
 }
 .headerSection{
-    height: 15%;
+    height: 20%;
     width: 100%;
     position: relative;
 }
@@ -18,7 +18,20 @@
     gap: 1rem;
     position: absolute;
     top: 35%;
+    cursor: pointer;
     right: 5%;
+    width: 20%;
+}
+.loggedInUserDetails{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 1rem;
+    position: absolute;
+    top: 35%;
+    cursor: pointer;
+    right: 5%;
+    width: 30%;
 }
 .loginBtn{
     background-color: #ED5353;
@@ -28,6 +41,7 @@
     border-radius: 5px;
     font-weight: 500;
     padding: .2rem;
+    cursor: pointer;
 }
 .registerBtn{
     color: #ED5353;
@@ -36,12 +50,33 @@
     border-radius: 5px;
     font-weight: 600;
     border: none;
+    cursor: pointer;
+
+}
+.logoutBtn{
+    background-color: #ED5353;
+    color: white;
+    border: 2px solid white;
+    width: 100px;
+    border-radius: 5px;
+    font-weight: 500;
+    padding: .1rem;
+    cursor: pointer;
+    height: max-content;
+}
+.userNameDiv{
+    color: white;
+    width: 60%;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
 }
 .appName{
     position: absolute;
-    top: 32%;
+    top: 26%;
     left: 5%;
     color: white;
+    cursor: pointer;
 }
 
 .mainSection{
@@ -66,6 +101,7 @@
     color:#848484 ;
     border-radius: 5px;
     padding: .5rem;
+    cursor: pointer;
 }
 .seachJobContainer{
     height: max-content;
@@ -83,20 +119,28 @@
 }
 
 .applyFilterBtn{
-    width: 120px;
+    width: 50%;
     color: white;
     background-color:#ED5353;
-    height: 40px;
+    height: max-content;
     border: none;
+    padding-top: .3rem;
+    padding-bottom: .3rem;
     border-radius: 5px;
+    cursor: pointer;
 }
 
-.clearBtn{
-   width: 70px; 
-   height: 40px;
+.addJobBtn{
+   background-color: rgb(67, 150, 253);
+   width: 50%;
+   height: max-content;
+   padding-top: .3rem;
+   padding-bottom: .3rem;
    border: none;
-   background-color: white;
-   margin-left: 1.5rem;
+   text-align: center;
+   border-radius: 5px;
+   color: white;
+   cursor: pointer;
 }
 
 .chipContainer{
@@ -107,6 +151,7 @@
     justify-content: space-between;
     align-items: center;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .cross{
