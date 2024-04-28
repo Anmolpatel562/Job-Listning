@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../pages_css/LoginPage.css";
 import loginImage from "../resources/loginImage.png";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {registerUser}  from "../auth/userApis.js";
 
 const SignUpPage = () => {
@@ -17,6 +17,7 @@ const SignUpPage = () => {
   const notify = (value) => {
     toast(value);
   };
+  const navigate = useNavigate();
 
   const signUpBtnHandler = async() => {
     if (
@@ -32,6 +33,7 @@ const SignUpPage = () => {
     const response = await registerUser(userDetails);
     if(response){
        toast(response.data.message);
+       navigate('/login');
     }
   };
   return (
@@ -99,7 +101,7 @@ const SignUpPage = () => {
               privacy policy
             </span>
           </div>
-          <div className="signInBtn" onClick={signUpBtnHandler}>
+          <div style={{cursor:"pointer"}} className="signInBtn" onClick={signUpBtnHandler}>
             Create Account
           </div>
           <p style={{ fontSize: "12px", marginTop: ".3rem" }}>
@@ -110,6 +112,7 @@ const SignUpPage = () => {
                   marginLeft: ".2rem",
                   color: "blue",
                   fontWeight: "600",
+                  cursor:"pointer"
                 }}
               >
                 Sign In

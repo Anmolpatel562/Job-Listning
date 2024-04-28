@@ -103,14 +103,14 @@ const JobDetails = () => {
               <div>
                 {isLoggedIn && isJobEditable && (
                   <button
-                    onClick={() => {
-                      navigate("/signUp", {
-                        state: {
-                          jobDetails: selectedJobDetail,
-                          edit: true,
-                        },
-                      });
-                    }}
+                    // onClick={() => {
+                    //   navigate("/signUp", {
+                    //     state: {
+                    //       jobDetails: selectedJobDetail,
+                    //       edit: true,
+                    //     },
+                    //   });
+                    // }}
                     className={styles.edit}
                   >
                     Edit Job

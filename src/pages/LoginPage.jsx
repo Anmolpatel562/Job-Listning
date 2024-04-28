@@ -83,7 +83,7 @@ const LoginPage = () => {
               }
             />
           </div>
-          <div className="signInBtn" onClick={signInBtnHandler}>
+          <div style={{cursor:"pointer"}} className="signInBtn" onClick={signInBtnHandler}>
             Sign in
           </div>
           <p style={{ fontSize: "12px", marginTop: ".3rem" }}>
