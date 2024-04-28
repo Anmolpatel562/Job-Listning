@@ -25,7 +25,7 @@ const JobPage = () => {
   const fetchJobs = async (req, res) => {
     try {
       await axios
-        .get(`http://localhost:4000/getAllJobs?searchPosition=${inputJob}`)
+        .get(`http://job-listing-backend-1.onrender.com/getAllJobs?searchPosition=${inputJob}`)
         .then((res) => {
           setJobList(res.data.data);
         });
