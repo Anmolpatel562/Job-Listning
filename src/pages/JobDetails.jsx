@@ -43,6 +43,9 @@ const JobDetails = () => {
                 <button onClick={logoutHandler} className="logoutBtn">
                   Logout
                 </button>
+                <button onClick={()=>navigate('/jobPage')} className="logoutBtn">
+                  Back
+                </button>
               </div>
             ) : (
               <div className="loginSignUpBtn">

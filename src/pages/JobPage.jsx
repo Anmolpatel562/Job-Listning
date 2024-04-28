@@ -22,10 +22,10 @@ const JobPage = () => {
     fetchJobs();
   }, [inputJob]);
 
-  const fetchJobs = async (req, res) => {
+  const fetchJobs = async () => {
     try {
       await axios
-        .get(`http://localhost:4000/getAllJobs?searchPosition=${inputJob}`)
+        .get(`https://job-listing-backend-1.onrender.com/getAllJobs?searchPosition=${inputJob}`)
         .then((res) => {
           setJobList(res.data.data);
         });
@@ -34,11 +34,11 @@ const JobPage = () => {
     }
   };
 
-  const fetchfilteredJob = async (req, res) => {
+  const fetchfilteredJob = async () => {
     try {
       if (skills.length > 0) {
         await axios
-          .get(`http://localhost:4000/getAllJobs?skills=${skills}`)
+          .get(`https://job-listing-backend-1.onrender.com/getAllJobs?skills=${skills}`)
           .then((res) => {
             setJobList(res.data.data);
           });
