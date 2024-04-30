@@ -10,12 +10,11 @@ const AddJob = () => {
   
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.state);
-  const jobData = location.state;
+  const [jobData,setJobData] = useState(location.state.jobData);
 
   const [requiredSkills] = useState([]);
   const [jobDetails, setJobDetails] = useState({
-    companyName: "",
+    companyName: jobData?jobData.companyName:"",
     logoURL: "",
     position: "",
     salary: "",
