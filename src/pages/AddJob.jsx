@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import "../pages_css/AddJob.css";
 import addJob from "../resources/addJob.png";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import {createJobPost} from "../auth/jobApis.js"
+
 
 const AddJob = () => {
   
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location.state);
+  const jobData = location.state;
 
   const [requiredSkills] = useState([]);
   const [jobDetails, setJobDetails] = useState({
