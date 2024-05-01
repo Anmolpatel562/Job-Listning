@@ -1,6 +1,5 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-const backendURL = process.env.REACT_APP_BACKENDURL;
 
 export const createJobPost = async ({
   companyName,
@@ -18,7 +17,7 @@ export const createJobPost = async ({
   try {
     const token = JSON.parse(localStorage.getItem("token"));
     axios.defaults.headers.common["Authorization"] = token;
-    const response = await axios.post(`${backendURL}createJobPost`, {
+    const response = await axios.post(`${process.env.REACT_APP_BACKENDURL}createJobPost`, {
       companyName,
       logoURL,
       position,
@@ -42,7 +41,7 @@ export const getJobDetailsById = async(jobId) => {
   try{
     console.log(backendURL)
     const userId = JSON.parse(localStorage.getItem("userId"));
-    const response = await axios.get(`${backendURL}getJobDetailsById/${jobId}/${userId}`);
+    const response = await axios.get(`${process.env.REACT_APP_BACKENDURL}getJobDetailsById/${jobId}/${userId}`);
     return response.data;
   }catch(error){
     console.log(error);

@@ -1,11 +1,10 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const backendURL = process.env.REACT_APP_BACKENDURL;
 
 export const registerUser = async ({ name, email, password, phone }) => {
   try {
-    const response = await axios.post(`${backendURL}register`, {
+    const response = await axios.post(`${process.env.REACT_APP_BACKENDURL}register`, {
       name,
       email,
       password,
@@ -20,7 +19,7 @@ export const registerUser = async ({ name, email, password, phone }) => {
 
 export const loginUser = async ({ email, password }) => {
   try {
-    const response = await axios.post(`${backendURL}login`, {
+    const response = await axios.post(`${process.env.REACT_APP_BACKENDURL}login`, {
       email,
       password,
     });
