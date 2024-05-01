@@ -39,7 +39,6 @@ export const createJobPost = async ({
 
 export const getJobDetailsById = async(jobId) => {
   try{
-    console.log(backendURL)
     const userId = JSON.parse(localStorage.getItem("userId"));
     const response = await axios.get(`${process.env.REACT_APP_BACKENDURL}getJobDetailsById/${jobId}/${userId}`);
     return response.data;
