@@ -1,7 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-
-const backendURL = "https://job-listing-backend-1.onrender.com/";
+const backendURL = process.env.REACT_APP_BACKENDURL;
 
 export const createJobPost = async ({
   companyName,
@@ -41,6 +40,7 @@ export const createJobPost = async ({
 
 export const getJobDetailsById = async(jobId) => {
   try{
+    console.log(backendURL)
     const userId = JSON.parse(localStorage.getItem("userId"));
     const response = await axios.get(`${backendURL}getJobDetailsById/${jobId}/${userId}`);
     return response.data;

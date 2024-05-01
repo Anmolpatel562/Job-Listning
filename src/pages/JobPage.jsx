@@ -7,7 +7,9 @@ import empReq from "../resources/empReq.png";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
+
 const JobPage = () => {
+
   const [skills, setSkills] = useState([]);
   const [jobList, setJobList] = useState([]);
   const [inputJob, setInputJob] = useState("");
@@ -25,7 +27,7 @@ const JobPage = () => {
   const fetchJobs = async () => {
     try {
       await axios
-        .get(`https://job-listing-backend-1.onrender.com/getAllJobs?searchPosition=${inputJob}`)
+        .get(`${process.env.REACT_APP_BACKENDURL}getAllJobs?searchPosition=${inputJob}`)
         .then((res) => {
           setJobList(res.data.data);
         });
@@ -38,7 +40,7 @@ const JobPage = () => {
     try {
       if (skills.length > 0) {
         await axios
-          .get(`https://job-listing-backend-1.onrender.com/getAllJobs?skills=${skills}`)
+          .get(`${process.env.REACT_APP_BACKENDURL}getAllJobs?skills=${skills}`)
           .then((res) => {
             setJobList(res.data.data);
           });

@@ -1,11 +1,10 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const backendURL = "https://job-listing-backend-1.onrender.com/";
+const backendURL = process.env.REACT_APP_BACKENDURL;
 
 export const registerUser = async ({ name, email, password, phone }) => {
   try {
-    console.log(backendURL)
     const response = await axios.post(`${backendURL}register`, {
       name,
       email,
