@@ -6,19 +6,18 @@ import axios from "axios";
 import empReq from "../resources/empReq.png";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import Spinner from "../Spinner";
 
 const JobPage = () => {
-
   const [skills, setSkills] = useState([]);
   const [jobList, setJobList] = useState([]);
   const [inputJob, setInputJob] = useState("");
-  const [userName,setUserName] = useState("");
+  const [userName, setUserName] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  useEffect(()=>{
+  useEffect(() => {
     setUserName(JSON.parse(localStorage.getItem("name")));
-  },[])
-  
+  }, []);
 
   useEffect(() => {
     fetchJobs();
@@ -27,9 +26,12 @@ const JobPage = () => {
   const fetchJobs = async () => {
     try {
       await axios
-        .get(`${process.env.REACT_APP_BACKENDURL}getAllJobs?searchPosition=${inputJob}`)
+        .get(
+          `${process.env.REACT_APP_BACKENDURL}getAllJobs?searchPosition=${inputJob}`
+        )
         .then((res) => {
           setJobList(res.data.data);
+          setLoading(false);
         });
     } catch (error) {
       console.log(error);
@@ -82,27 +84,26 @@ const JobPage = () => {
     localStorage.clear("token");
     setUserName("");
     toast("User Logged Out Successfully !!");
-  }
+  };
 
   const viewDetailsHandler = (id) => {
-    navigate('/jobDetails',{
-      state:{id}
+    navigate("/jobDetails", {
+      state: { id },
     });
-  }
+  };
 
   return (
     <div className="JobPageContainer">
       <div className="headerSection">
-        <img className="imgHeader" src={rect} alt="headerImg"/>
+        <img className="imgHeader" src={rect} alt="headerImg" />
         <h1 className="appName">Jobfinder</h1>
+
         {userName ? (
           <div className="loggedInUserDetails">
             <button onClick={logoutBtnBtnHandler} className="logoutBtn">
               Logout
             </button>
-            <div className="userNameDiv">
-              Hello ! {userName}
-            </div>
+            <div className="userNameDiv">Hello ! {userName}</div>
           </div>
         ) : (
           <div className="loginSignUpBtn">
@@ -116,7 +117,7 @@ const JobPage = () => {
         )}
       </div>
       <div className="mainSection">
-        <div className="jobListContainer">
+        <div className="jobListContainer" >
           <div className="seachJobContainer">
             <div className="searchBar">
               <span
@@ -231,7 +232,11 @@ const JobPage = () => {
                             onClick={() => removeChipHandler(skill)}
                             className="cross"
                           >
-                            <img src={cross} style={{ paddingTop: ".4rem" }} alt=""/>
+                            <img
+                              src={cross}
+                              style={{ paddingTop: ".4rem" }}
+                              alt=""
+                            />
                           </span>
                         </div>
                       );
@@ -259,7 +264,7 @@ const JobPage = () => {
               </div>
             </div>
           </div>
-
+          <div style={{width:"max-content",margin:"auto",marginTop:"4rem"}}>{loading ? <Spinner></Spinner> : <></>}</div>
           <div style={{ marginTop: "3.5rem", paddingBottom: "1.5rem" }}>
             {jobList ? (
               jobList.map((job) => {
@@ -352,7 +357,12 @@ const JobPage = () => {
                               );
                             })}
                           </div>
-                          <div onClick={() => viewDetailsHandler(job._id)} className="viewDetailBtn">View Details</div>
+                          <div
+                            onClick={() => viewDetailsHandler(job._id)}
+                            className="viewDetailBtn"
+                          >
+                            View Details
+                          </div>
                         </div>
                       </div>
                     </div>
