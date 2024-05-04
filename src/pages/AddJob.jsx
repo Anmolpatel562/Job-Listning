@@ -2,45 +2,62 @@ import React, { useState } from "react";
 import "../pages_css/AddJob.css";
 import addJob from "../resources/addJob.png";
 import { toast } from "react-toastify";
-import { useNavigate,useLocation } from "react-router-dom";
-import {createJobPost} from "../auth/jobApis.js"
+import { useNavigate, useLocation } from "react-router-dom";
+import { createJobPost, updateJobPost } from "../auth/jobApis.js";
 
 
 const AddJob = () => {
-  
   const navigate = useNavigate();
   const location = useLocation();
-  const [jobData,setJobData] = useState(location.state.jobData);
+  const [jobData] = useState(location.state?.jobDetails);
+  const jobId = location.state?.jobId;
 
   const [requiredSkills] = useState([]);
   const [jobDetails, setJobDetails] = useState({
-    companyName: jobData?jobData.companyName:"",
-    logoURL: "",
-    position: "",
-    salary: "",
-    location: "",
-    locationType: "",
-    jobType: "",
-    description: "",
-    aboutCompany: "",
-    skills: [],
-    information: "",
+    companyName: jobData ? jobData.companyName : "",
+    logoURL: jobData ? jobData.logoURL : "",
+    position: jobData ? jobData.position : "",
+    salary: jobData ? jobData.salary : "",
+    location: jobData ? jobData.location : "",
+    locationType: jobData ? jobData.locationType : "",
+    jobType: jobData ? jobData.jobType : "",
+    description: jobData ? jobData.description : "",
+    aboutCompany: jobData ? jobData.aboutCompany : "",
+    skills: jobData ? jobData.skills : [],
+    information: jobData ? jobData.information : "",
   });
 
   const addSkillsHandler = (e) => {
     if (!requiredSkills.includes(e.target.value)) {
-      setJobDetails({...jobDetails,skills:[...jobDetails.skills,e.target.value]});
+      setJobDetails({
+        ...jobDetails,
+        skills: [...jobDetails.skills, e.target.value],
+      });
     }
   };
 
-  const addJobBtn = async (req, res) => {
+  const addJobBtn = async () => {
     console.log(jobDetails);
     const response = await createJobPost(jobDetails);
-    if(response){
+    if (response) {
       toast(response.data.message);
-      navigate('/jobPage');
+      navigate("/jobPage");
     }
   };
+
+  const updateJobPostHandler = async () => {
+    try{
+      const response = await updateJobPost(jobId,jobDetails);
+      toast(response?.data.message);
+      navigate("/jobDetails", {
+        state: {
+          id:jobId
+        },
+      });
+    }catch(error){
+      console.log(error)
+    }
+  }
 
   return (
     <div className="addJobContainer">
@@ -210,10 +227,17 @@ const AddJob = () => {
                     borderRadius: "5px",
                   }}
                 />
-                <button onClick={()=>setJobDetails({
-                  ...jobDetails,
-                  skills:""
-                })} className="clearSkillsBtn">Clear</button>
+                <button
+                  onClick={() =>
+                    setJobDetails({
+                      ...jobDetails,
+                      skills: "",
+                    })
+                  }
+                  className="clearSkillsBtn"
+                >
+                  Clear
+                </button>
                 <select
                   onChange={addSkillsHandler}
                   style={{
@@ -279,17 +303,30 @@ const AddJob = () => {
             </div>
           </div>
           <div style={{ textAlign: "right" }}>
-            <button onClick={()=>{
-              navigate('/jobPage');
-            }} className="cancelBtn">Cancel</button>
-            <button onClick={addJobBtn} className="addJobButton">
-              + Add Job
+            <button
+              onClick={() => {
+                navigate("/jobPage");
+              }}
+              className="cancelBtn"
+            >
+              Cancel
             </button>
+            {jobData ? (
+              <button onClick={updateJobPostHandler} className="addJobButton">Update Job</button>
+            ) : (
+              <button onClick={addJobBtn} className="addJobButton">
+                + Add Job
+              </button>
+            )}
           </div>
         </div>
       </div>
       <div className="jobRightContainer">
-        <img style={{ width: "100%", height: "100%" }} src={addJob} alt=""></img>
+        <img
+          style={{ width: "100%", height: "100%" }}
+          src={addJob}
+          alt=""
+        ></img>
       </div>
     </div>
   );

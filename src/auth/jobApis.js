@@ -37,7 +37,7 @@ export const createJobPost = async ({
   }
 };
 
-export const getJobDetailsById = async(jobId) => {
+export const getJobDetailsById = async (jobId) => {
   try{
     const userId = JSON.parse(localStorage.getItem("userId"));
     const response = await axios.get(`${process.env.REACT_APP_BACKENDURL}getJobDetailsById/${jobId}/${userId}`);
@@ -45,4 +45,22 @@ export const getJobDetailsById = async(jobId) => {
   }catch(error){
     console.log(error);
   }  
+}
+
+export const updateJobPost = async (jobId,updatedData) =>{
+  try{
+    const response = await axios.put(`${process.env.REACT_APP_BACKENDURL}updateJobPost/${jobId}`,updatedData);
+    return response;
+  }catch(error){
+    console.log(error);
+  }
+}
+
+export const deleteJobPost = async (jobId) => {
+  try{
+    const response = await axios.delete(`${process.env.REACT_APP_BACKENDURL}deleteJobPost/${jobId}`,deleteJobPost);
+    return response;
+  }catch(error){
+    console.log(error);
+  }
 }

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getJobDetailsById } from "../auth/jobApis";
+import { getJobDetailsById,deleteJobPost } from "../auth/jobApis";
 import styles from "../pages_css/JobDetails.module.css";
 import rect from "../resources/rect.png";
+import { toast } from "react-toastify";
 
 const JobDetails = () => {
   const location = useLocation();
@@ -11,6 +12,7 @@ const JobDetails = () => {
   const [isLoggedIn] = useState(!!localStorage.getItem("token"));
   const [isJobEditable, setIsJobEditable] = useState(false);
   const [selectedJobDetail, setSelectedJobDetail] = useState("");
+  const [showDelete,setShowDelete] = useState("none");
 
   useEffect(() => {
     getDetails();
@@ -31,10 +33,28 @@ const JobDetails = () => {
     navigate("/login");
   };
 
+  const showDeleteBox = () => {
+    if(showDelete === "none"){
+       setShowDelete("");
+    }else{
+       setShowDelete("none");
+    }
+  }
+
+  const deleteButtonHandler = async() => {
+    try{
+      const response = await deleteJobPost(jobId);
+      toast(response?.data.message);
+      navigate('/jobPage');
+    }catch(error){
+      console.log(error);
+    }
+  }
+
   return (
     <>
       {selectedJobDetail ? (
-        <div className={styles.body}>
+        <>
           <div className="headerSection">
             <img className="imgHeader" src={rect} alt="headerImg" />
             <h1 className="appName">Jobfinder</h1>
@@ -43,7 +63,10 @@ const JobDetails = () => {
                 <button onClick={logoutHandler} className="logoutBtn">
                   Logout
                 </button>
-                <button onClick={()=>navigate('/jobPage')} className="logoutBtn">
+                <button
+                  onClick={() => navigate("/jobPage")}
+                  className="logoutBtn"
+                >
                   Back
                 </button>
               </div>
@@ -61,14 +84,24 @@ const JobDetails = () => {
               </div>
             )}
           </div>
-          <div className={styles.container}>
-            <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:"2rem"}}>
+          <div style={{ marginTop: "8rem" }} className={styles.container}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "2rem",
+              }}
+            >
               <img
-                style={{ width: "80px"}}
+                style={{ width: "80px" }}
                 src={selectedJobDetail?.logoURL}
                 alt=""
               />
-              <p style={{fontSize:"40px",paddingTop:"1rem"}} className={styles.containerText}>
+              <p
+                style={{ fontSize: "40px", paddingTop: "1rem" }}
+                className={styles.containerText}
+              >
                 {selectedJobDetail?.companyName}
               </p>
             </div>
@@ -102,19 +135,31 @@ const JobDetails = () => {
               </div>
               <div>
                 {isLoggedIn && isJobEditable && (
-                  <button
-                    onClick={() => {
-                      navigate("/addJob", {
-                        state: {
-                          jobDetails: selectedJobDetail,
-                          edit: true,
-                        },
-                      });
-                    }}
-                    className={styles.edit}
-                  >
-                    Edit Job
-                  </button>
+                  <div>
+                    <button
+                     style={{backgroundColor:"#2899e4"}}
+                      onClick={() => {
+                        navigate("/addJob", {
+                          state: {
+                            jobDetails: selectedJobDetail,
+                            edit: true,
+                            jobId: jobId,
+                          },
+                        });
+                      }}
+                      className={styles.edit}
+                    >
+                      Edit Job
+                    </button>
+                    <button onClick={showDeleteBox} style={{marginLeft:"10px"}} className={styles.edit}>
+                      Delete 
+                    </button>
+                    <div style={{display:showDelete, backgroundColor:"#faebe7",padding:".8rem",textAlign:"right",borderRadius:"10px",marginTop:"8px",fontSize:"14px"}}>
+                      <p>Do you want to delete this post ?</p>
+                      <button onClick={deleteButtonHandler} style={{width:"60px", border:"1px solid #f82929", backgroundColor:"#f8f7f7",borderRadius:"5px"}}>Yes</button>
+                      <button onClick={showDeleteBox} style={{width:"60px", border:"1px solid #f82929", backgroundColor:"#f8f7f7",borderRadius:"5px",marginLeft:"5px"}}>No</button>
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
@@ -162,7 +207,7 @@ const JobDetails = () => {
               </p>
             </div>
           </div>
-        </div>
+        </>
       ) : (
         <></>
       )}
