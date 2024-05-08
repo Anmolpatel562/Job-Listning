@@ -188,6 +188,7 @@ const JobDetails = () => {
             </div>
             <div className={styles.info}>
               <h2>About Company</h2>
+              {selectedJobDetail.aboutCompany}
               <p className={styles.lightText}>{selectedJobDetail.about}</p>
             </div>
             <div className={styles.info}>
