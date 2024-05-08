@@ -191,7 +191,7 @@ const JobDetails = () => {
               <p className={styles.lightText}>{selectedJobDetail.about}</p>
             </div>
             <div className={styles.info}>
-              <h2>Skill(s) Required</h2>
+              <h2>Skills Required</h2>
               {selectedJobDetail?.skills?.map((skill) => {
                 return (
                   <p className={styles.skill} key={skill}>
